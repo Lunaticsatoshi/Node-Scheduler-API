@@ -1,6 +1,11 @@
 import express, { json } from "express";
 import cors from "cors";
 
+// Middlewares
+import { notFound, errorHandler } from "./middlewares/error.js";
+
+import { router as indexRouter } from "./routes/index.js";
+
 const app = express();
 
 app.use(
@@ -22,6 +27,11 @@ app.use(json());
 app.set("trust proxy", 1);
 
 const PORT = process.env.PORT || 5000;
+
+app.use("/", indexRouter);
+
+app.use(notFound);
+app.use(errorHandler);
 
 (() => {
   app.listen(PORT, () => {

@@ -52,11 +52,17 @@ Make sure you have Node, Redis and TypeScript installed on your machine.
       ```sh
       yarn install
       ```
-1. Start the dev server
+2. Start the dev server
       ```sh
       yarn dev
       ```
+#### Steps to send a api requests
+1. Change the date in src/script.js
 
+2. Execute the script
+      ```sh
+      node ./src/script.js
+      ```
 
 ## 🔐 License
 

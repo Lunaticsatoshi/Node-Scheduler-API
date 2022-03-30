@@ -1,10 +1,19 @@
 import { scheduleJob } from "node-schedule";
 
-import { scheduledEvent } from "../utils/scheduledEvent.js";
-
 export const scheduleEvent = async (req, res) => {
   const { event } = req.body;
   const { text, date } = event;
-  const job = scheduleJob(date, scheduledEvent(text));
-  res.status(200).send(job);
+  try {
+    const scheduleDate = new Date(date).toISOString();
+    const job = await scheduleJob(scheduleDate, function () {
+      const reversedText = text.split("").reverse().join("");
+      setTimeout(() => {
+        console.log(`${reversedText}`);
+      }, text.length * 1000);
+    });
+    return res.status(200).json({ message: "Event scheduled successfully" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send(error);
+  }
 };

@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { scheduleEvent } from "../controllers/scheduler.js";
+import { scheduleEvent } from "../../controllers/scheduler.js";
 
 export const router = Router();
 
